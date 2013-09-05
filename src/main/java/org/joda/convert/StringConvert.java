@@ -278,22 +278,7 @@ public final class StringConvert {
      * @return the method to call, null means use {@code toString}
      */
     private Method findToStringMethod(Class<?> cls) {
-        Method matched = null;
-        Class<?> loopCls = cls;
-        while (loopCls != null && matched == null) {
-            Method[] methods = loopCls.getDeclaredMethods();
-            for (Method method : methods) {
-                ToString toString = method.getAnnotation(ToString.class);
-                if (toString != null) {
-                    if (matched != null) {
-                        throw new IllegalStateException("Two methods are annotated with @ToString");
-                    }
-                    matched = method;
-                }
-            }
-            loopCls = loopCls.getSuperclass();
-        }
-        return matched;
+        throw new IllegalStateException("Method 'findToStringMethod' not implemented");
     }
 
     /**
@@ -304,18 +289,7 @@ public final class StringConvert {
      * @return the method to call, null means use {@code toString}
      */
     private <T> Constructor<T> findFromStringConstructor(Class<T> cls) {
-        Constructor<T> con;
-        try {
-            con = cls.getDeclaredConstructor(String.class);
-        } catch (NoSuchMethodException ex) {
-            try {
-                con = cls.getDeclaredConstructor(CharSequence.class);
-            } catch (NoSuchMethodException ex2) {
-                return null;
-            }
-        }
-        FromString fromString = con.getAnnotation(FromString.class);
-        return fromString != null ? con : null;
+        throw new IllegalStateException("Method 'findToStringMethod' not implemented");
     }
 
     /**
@@ -325,25 +299,7 @@ public final class StringConvert {
      * @return the method to call, null means use {@code toString}
      */
     private Method findFromStringMethod(Class<?> cls, boolean searchSuperclasses) {
-        Method matched = null;
-        Class<?> loopCls = cls;
-        while (loopCls != null && matched == null) {
-            Method[] methods = loopCls.getDeclaredMethods();
-            for (Method method : methods) {
-                FromString fromString = method.getAnnotation(FromString.class);
-                if (fromString != null) {
-                    if (matched != null) {
-                        throw new IllegalStateException("Two methods are annotated with @ToString");
-                    }
-                    matched = method;
-                }
-            }
-            if (searchSuperclasses == false) {
-                break;
-            }
-            loopCls = loopCls.getSuperclass();
-        }
-        return matched;
+        throw new IllegalStateException("Method 'findToStringMethod' not implemented");
     }
 
     //-----------------------------------------------------------------------

@@ -18,23 +18,13 @@ package org.joda.convert;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Currency;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+
 
 /**
  * Conversion between JDK classes and a {@code String}.
@@ -230,18 +220,18 @@ enum JDKStringConverter implements StringConverter<Object> {
             }
         }
     },
-    /**
-     * Package converter.
-     */
-    PACKAGE(Package.class) {
-        @Override
-        public String convertToString(Object object) {
-            return ((Package) object).getName();
-        }
-        public Object convertFromString(Class<?> cls, String str) {
-            return Package.getPackage(str);
-        }
-    },
+//    /**
+//     * Package converter.
+//     */
+//    PACKAGE(Package.class) {
+//        @Override
+//        public String convertToString(Object object) {
+//            return ((Package) object).getName();
+//        }
+//        public Object convertFromString(Class<?> cls, String str) {
+//            return Package.getPackage(str);
+//        }
+//    },
     /**
      * Currency converter.
      */
@@ -262,50 +252,50 @@ enum JDKStringConverter implements StringConverter<Object> {
             return TimeZone.getTimeZone(str);
         }
     },
-    /**
-     * UUID converter.
-     */
-    UUID(UUID.class) {
-        public Object convertFromString(Class<?> cls, String str) {
-            return java.util.UUID.fromString(str);
-        }
-    },
-    /**
-     * URL converter.
-     */
-    URL(URL.class) {
-        public Object convertFromString(Class<?> cls, String str) {
-            try {
-                return new URL(str);
-            } catch (MalformedURLException ex) {
-                throw new RuntimeException(ex.getMessage(), ex);
-            }
-        }
-    },
-    /**
-     * URI converter.
-     */
-    URI(URI.class) {
-        public Object convertFromString(Class<?> cls, String str) {
-            return java.net.URI.create(str);
-        }
-    },
-    /**
-     * InetAddress converter.
-     */
-    INET_ADDRESS(InetAddress.class) {
-        @Override
-        public String convertToString(Object object) {
-            return ((InetAddress) object).getHostAddress();
-        }
-        public Object convertFromString(Class<?> cls, String str) {
-            try {
-                return InetAddress.getByName(str);
-            } catch (UnknownHostException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-    },
+//    /**
+//     * UUID converter.
+//     */
+//    UUID(UUID.class) {
+//        public Object convertFromString(Class<?> cls, String str) {
+//            return java.util.UUID.fromString(str);
+//        }
+//    },
+//    /**
+//     * URL converter.
+//     */
+//    URL(URL.class) {
+//        public Object convertFromString(Class<?> cls, String str) {
+//            try {
+//                return new URL(str);
+//            } catch (MalformedURLException ex) {
+//                throw new RuntimeException(ex.getMessage(), ex);
+//            }
+//        }
+//    },
+//    /**
+//     * URI converter.
+//     */
+//    URI(URI.class) {
+//        public Object convertFromString(Class<?> cls, String str) {
+//            return java.net.URI.create(str);
+//        }
+//    },
+//    /**
+//     * InetAddress converter.
+//     */
+//    INET_ADDRESS(InetAddress.class) {
+//        @Override
+//        public String convertToString(Object object) {
+//            return ((InetAddress) object).getHostAddress();
+//        }
+//        public Object convertFromString(Class<?> cls, String str) {
+//            try {
+//                return InetAddress.getByName(str);
+//            } catch (UnknownHostException ex) {
+//                throw new RuntimeException(ex);
+//            }
+//        }
+//    },
     /**
      * File converter.
      */

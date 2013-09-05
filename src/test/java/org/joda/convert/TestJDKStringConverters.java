@@ -15,27 +15,18 @@
  */
 package org.joda.convert;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.net.InetAddress;
-import java.net.URI;
-import java.net.URL;
-import java.util.Calendar;
-import java.util.Currency;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test JDKStringConverters.
@@ -213,12 +204,12 @@ public class TestJDKStringConverters {
         JDKStringConverter.CLASS.convertFromString(Class.class, "RUBBISH");
     }
 
-    @Test
-    public void test_Package() {
-        JDKStringConverter test = JDKStringConverter.PACKAGE;
-        doTest(test, Package.class, Locale.class.getPackage(), "java.util");
-        doTest(test, Package.class, FromString.class.getPackage(), "org.joda.convert");
-    }
+//    @Test
+//    public void test_Package() {
+//        JDKStringConverter test = JDKStringConverter.PACKAGE;
+//        doTest(test, Package.class, Locale.class.getPackage(), "java.util");
+//        doTest(test, Package.class, FromString.class.getPackage(), "org.joda.convert");
+//    }
 
     @Test
     public void test_Currency() {
@@ -233,42 +224,42 @@ public class TestJDKStringConverters {
         doTest(test, TimeZone.class, TimeZone.getTimeZone("Europe/London"), "Europe/London");
         doTest(test, TimeZone.class, TimeZone.getTimeZone("America/New_York"), "America/New_York");
     }
-
-    @Test
-    public void test_UUID() {
-        JDKStringConverter test = JDKStringConverter.UUID;
-        UUID uuid = UUID.randomUUID();
-        doTest(test, UUID.class, uuid, uuid.toString());
-    }
-
-    @Test
-    public void test_URL() throws Exception {
-        JDKStringConverter test = JDKStringConverter.URL;
-        doTest(test, URL.class, new URL("http://localhost:8080/my/test"), "http://localhost:8080/my/test");
-        doTest(test, URL.class, new URL(null, "ftp:world"), "ftp:world");
-    }
-
-    @Test(expected=RuntimeException.class)
-    public void test_URL_invalidFormat() {
-        JDKStringConverter.URL.convertFromString(URL.class, "RUBBISH:RUBBISH");
-    }
-
-    @Test
-    public void test_URI() {
-        JDKStringConverter test = JDKStringConverter.URI;
-        doTest(test, URI.class, URI.create("http://localhost:8080/my/test"), "http://localhost:8080/my/test");
-        doTest(test, URI.class, URI.create("/my/test"), "/my/test");
-        doTest(test, URI.class, URI.create("/my/../test"), "/my/../test");
-        doTest(test, URI.class, URI.create("urn:hello"), "urn:hello");
-    }
-
-    @Test
-    public void test_InetAddress() throws Exception {
-        JDKStringConverter test = JDKStringConverter.INET_ADDRESS;
-        doTest(test, InetAddress.class, InetAddress.getByName("1.2.3.4"), "1.2.3.4");
-        doTest(test, InetAddress.class, InetAddress.getByName("2001:0db8:85a3:0000:0000:8a2e:0370:7334"), "2001:db8:85a3:0:0:8a2e:370:7334");
-    }
-
+//
+//    @Test
+//    public void test_UUID() {
+//        JDKStringConverter test = JDKStringConverter.UUID;
+//        UUID uuid = UUID.randomUUID();
+//        doTest(test, UUID.class, uuid, uuid.toString());
+//    }
+//
+//    @Test
+//    public void test_URL() throws Exception {
+//        JDKStringConverter test = JDKStringConverter.URL;
+//        doTest(test, URL.class, new URL("http://localhost:8080/my/test"), "http://localhost:8080/my/test");
+//        doTest(test, URL.class, new URL(null, "ftp:world"), "ftp:world");
+//    }
+//
+//    @Test(expected=RuntimeException.class)
+//    public void test_URL_invalidFormat() {
+//        JDKStringConverter.URL.convertFromString(URL.class, "RUBBISH:RUBBISH");
+//    }
+//
+//    @Test
+//    public void test_URI() {
+//        JDKStringConverter test = JDKStringConverter.URI;
+//        doTest(test, URI.class, URI.create("http://localhost:8080/my/test"), "http://localhost:8080/my/test");
+//        doTest(test, URI.class, URI.create("/my/test"), "/my/test");
+//        doTest(test, URI.class, URI.create("/my/../test"), "/my/../test");
+//        doTest(test, URI.class, URI.create("urn:hello"), "urn:hello");
+//    }
+//
+//    @Test
+//    public void test_InetAddress() throws Exception {
+//        JDKStringConverter test = JDKStringConverter.INET_ADDRESS;
+//        doTest(test, InetAddress.class, InetAddress.getByName("1.2.3.4"), "1.2.3.4");
+//        doTest(test, InetAddress.class, InetAddress.getByName("2001:0db8:85a3:0000:0000:8a2e:0370:7334"), "2001:db8:85a3:0:0:8a2e:370:7334");
+//    }
+//
 //    @Test(expected=RuntimeException.class)
 //    public void test_InetAddress_invalidFormat() {
 //        JDKStringConverter.INET_ADDRESS.convertFromString(InetAddress.class, "RUBBISH");

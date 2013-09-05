@@ -18,7 +18,6 @@ package org.joda.convert;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
 /**
  * Conversion to and from a string using a toString method and a fromString constructor.
@@ -46,9 +45,9 @@ final class MethodConstructorStringConverter<T> extends ReflectionStringConverte
      */
     MethodConstructorStringConverter(Class<T> cls, Method toString, Constructor<T> fromString) {
         super(cls, toString);
-        if (cls.isInterface() || Modifier.isAbstract(cls.getModifiers()) || cls.isLocalClass() || cls.isMemberClass()) {
-            throw new IllegalArgumentException("FromString constructor must be on an instantiable class");
-        }
+//        if (cls.isInterface() || Modifier.isAbstract(cls.getModifiers()) || cls.isLocalClass() || cls.isMemberClass()) {
+//            throw new IllegalArgumentException("FromString constructor must be on an instantiable class");
+//        }
         if (fromString.getDeclaringClass() != cls) {
             throw new IllegalStateException("FromString constructor must be defined on specified class");
         }
